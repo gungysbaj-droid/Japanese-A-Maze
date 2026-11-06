@@ -54,7 +54,7 @@ item,condition,sentence
 - The sentence-initial bunsetsu is always `x-x-x`. If a word is sentence-initial in one condition but not in another (派遣社員が above), it gets a real distractor in the condition where it is not initial.
 - To control sharing yourself, fill in the `labels` column for every condition of the item: one label per bunsetsu, separated by spaces. Bunsetsu with the same label share a distractor (e.g. `0 9 1 2`).
 
-`input.csv` in this repository contains the 75 sample sentences of the original, one condition per item.
+`input.csv` in this repository is a sample with 4 items × 4 conditions (genitive の vs. nominative が subject, canonical vs. scrambled word order), written without a header row.
 
 ---
 
