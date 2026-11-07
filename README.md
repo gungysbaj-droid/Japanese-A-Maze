@@ -1,11 +1,11 @@
-# Japanese A-Maze (revised)
+# Japanese A-Maze
+
 A surprisal-based distractor generator for the G-Maze psycholinguistic task in Japanese.
 Inspired by the English/French A-Maze of Boyce, Futrell & Levy (2020); rebuilt around Japanese-specific structural constraints (particle clashes, POS-mismatch by slot type, bunsetsu-level segmentation) and an autoregressive language model (`rinna/japanese-gpt2-medium`) for surprisal scoring.
 
-> This repository is a modified version of [hg4220262-dev/Japanese-A-Maze](https://github.com/hg4220262-dev/Japanese-A-Maze).
-> The distractor strategy of the original is unchanged; the changes are in input/output handling, cross-condition sharing, and multiple candidates (see below).
+## What's new (2026-11): factorial design support
 
-## Changes from the original
+The distractor strategy is unchanged; the changes are in input/output handling, cross-condition sharing, and multiple candidates:
 
 1. **Input is now `input.csv` with `item`, `condition` and `sentence` columns.**
    Stimuli from a factorial design can be written as they are. Rows with the same `item` are the conditions of one item.
@@ -17,7 +17,7 @@ Inspired by the English/French A-Maze of Boyce, Futrell & Levy (2020); rebuilt a
 5. **`params.txt` next to the script is read automatically**, so settings can be changed without command-line options.
 6. **`grade_level` now defaults to 0** (no kanji or frequency filter). See [About `grade_level`](#about-grade_level).
 
-> **Note:** The input and output formats differ from the original version, so input files written for the original will not work as they are.
+> **Note:** The input and output formats changed with this revision, so input files written for the old version will not work as they are.
 
 ## Quick start
 ```bash
@@ -155,8 +155,8 @@ The built-in table does **not** match the official list exactly:
 
 To use an exact list, place a file named `kanji_grades.txt` in the same folder as the script, with the kanji for grade 1 on line 1, grade 2 on line 2, and so on. It is used instead of the built-in table.
 
-**2. Word frequency (a heuristic of the original script, not from the Course of Study).**
-Words below a minimum frequency are excluded. The thresholds are the original author's choice; no source is given in the code.
+**2. Word frequency (a heuristic of this script, not from the Course of Study).**
+Words below a minimum frequency are excluded. The thresholds are the author's choice; no source is given in the code.
 
 | `grade_level` | 0 | 1 | 2 | 3 | 4 | 5 | 6 |
 |---|---|---|---|---|---|---|---|
@@ -197,7 +197,7 @@ With `grade_level: 0` (the default) both filters are off: any word in the wordfr
   ✓ Tokenization:     clean
   ✓ Violation strength: acceptable distribution
 ```
-(Example from the original version.)
+(Example from the old version.)
 
 Violation strength classes:
 - **STRONG** — categorical double-が/を particle clash.
@@ -219,7 +219,9 @@ python tools/dump_pool.py bunsetsu_pool_v21_g0.pkl pool_g0.csv
 
 ## Citation & acknowledgements
 
-Original Japanese A-Maze: <https://github.com/hg4220262-dev/Japanese-A-Maze>.
+If you use this code, please cite:
+
+> Noda, Shotaro, & Nakatani, Kentaro. (2026). *A Japanese Implementation of the A-Maze Task: Method and Validation*. IEICE Technical Report TL2026-4(2026-06): 19-23.
 
 This work adapts the A-Maze framework of:
 
@@ -235,4 +237,4 @@ For G-Maze paradigm:
 
 ## License
 
-The original repository does not specify a license. Please contact the original author before reusing or redistributing this code.
+MIT License - see [LICENSE](LICENSE).
